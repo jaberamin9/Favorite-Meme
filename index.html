@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meme</title>
+  <link rel="stylesheet" href="./output/tailwind.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+  <!-- Main Body -->
+  <main class="grid grid-cols-[300px_1fr] gap-2">
+    <div class="h-screen grid grid-rows-[64px_1fr]">
+      <div class="navbar bg-base-100">
+        <div class="navbar-start">
+          <a class="btn btn-ghost text-base-content text-xl">Meme</a>
+        </div>
+      </div>
+
+      <div class="bg-base-300 ml-2 mb-2 h-auto overflow-auto rounded-md p-3 grid grid-rows-[70px_1fr]">
+        <div class="navbar-center flex">
+          <label class="w-full input input-bordered flex items-center gap-2">
+            <input id="favorite-memes-search" type="text" class="grow text-base-content" placeholder="Search" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+              class="h-4 w-4 opacity-70 text-base-content">
+              <path fill-rule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clip-rule="evenodd" />
+            </svg>
+          </label>
+        </div>
+        <div class="overflow-auto">
+          <div id="favorite-meme-list" class="flex flex-col gap-2 h-full">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-screen grid grid-rows-[64px_1fr]">
+      <div class="navbar p-0 bg-base-100 pr-1">
+        <div class="navbar-center hidden lg:flex">
+          <label class="w-[500px] input input-bordered flex items-center gap-2">
+            <input id="meme-search" type="text" class="grow text-base-content" placeholder="Search" />
+            <p id="error-search" class="text-red-400"></p>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+              class="h-4 w-4 opacity-70 text-base-content">
+              <path fill-rule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clip-rule="evenodd" />
+            </svg>
+        </div>
+
+        <div class="navbar-end w-full">
+          <div class="theme-changer">
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn m-1 p-2 border border-gray-300 rounded-md">
+                <i class="fa-solid fa-palette"></i>
+                <p id="selected-theme-name">Theme</p>
+                <svg width="12px" height="12px" class="inline-block h-2 w-2 fill-current opacity-60"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
+                  <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+                </svg>
+              </div>
+              <ul tabindex="0" id="theme-list"
+                class="border border-primary-content dropdown-content bg-base-300 rounded-md z-[1] w-52 h-[40vh] overflow-auto p-2 shadow-2xl">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="meme-container" class="flex overflow-auto justify-center align-middle bg-base-300 mr-2 mb-2 rounded-md">
+        <div class="p-5 w-full">
+          <p class="font-semibold mb-5 text-2xl">Memes Feed</p>
+          <div id="meme-list" class="grid grid-cols-3 gap-4 pb-4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <dialog id="api_key_modal" class="modal">
+    <div class="modal-box flex flex-col gap-4">
+      <div class="flex justify-between">
+        <h3 class="text-lg font-bold">Provide API key</h3>
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost">✕</button>
+        </form>
+      </div>
+      <p>If you don't have an API key, please go to https://humorapi.com, create an account, and find your API key in
+        the Profile section.</p>
+      <label class="input input-bordered flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
+          <path fill-rule="evenodd"
+            d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+            clip-rule="evenodd" />
+        </svg>
+        <input id="api-key-text" type="password" class="grow" value="" placeholder="insert your api key" />
+      </label>
+      <form method="dialog">
+        <button id="api-key-save-btn" class="btn bg-base-300 w-full">Save</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="fav_meme_modal" class="modal modal-middle">
+    <div class="modal-box">
+      <p class="py-4">You can customize your favorite meme title. This customized title will be used when you search for
+        your favorite meme.</p>
+      <label class="input input-bordered flex items-center gap-2 mt-4">
+        Title
+        <input id="meme-title-input" type="text" class="grow" />
+      </label>
+      <div class="modal-action">
+        <form method="dialog">
+          <button id="save-btn" class="btn">Save</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+  <script src="script.js"></script>
+</body>
+
+</html>

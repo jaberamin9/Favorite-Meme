@@ -1,0 +1,16 @@
+{
+  "name": "meme-app",
+  "version": "1.0.0",
+  "description": "meme",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./src/tailwind.css -o ./output/tailwind.css -w"
+  },
+  "keywords": [],
+  "author": "Jaber Amin",
+  "license": "ISC",
+  "devDependencies": {
+    "daisyui": "^4.12.6",
+    "tailwindcss": "^3.4.4"
+  }
+}
