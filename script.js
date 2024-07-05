@@ -11,45 +11,45 @@ const errorSearch = document.getElementById('error-search');
 let timeoutId;
 
 const themes = [
-    "light",
-    "dark",
-    "cupcake",
-    "bumblebee",
-    "emerald",
-    "corporate",
-    "synthwave",
-    "retro",
-    "cyberpunk",
-    "valentine",
-    "halloween",
-    "garden",
-    "forest",
-    "aqua",
-    "lofi",
-    "pastel",
-    "fantasy",
-    "wireframe",
-    "black",
-    "luxury",
-    "dracula",
-    "cmyk",
-    "autumn",
-    "business",
-    "acid",
-    "lemonade",
-    "night",
-    "coffee",
-    "winter",
-    "dim",
-    "nord",
-    "sunset",
+    { id: 1, theme: "light" },
+    { id: 2, theme: "dark" },
+    { id: 3, theme: "cupcake" },
+    { id: 4, theme: "bumblebee" },
+    { id: 5, theme: "emerald" },
+    { id: 6, theme: "corporate" },
+    { id: 7, theme: "synthwave" },
+    { id: 8, theme: "retro" },
+    { id: 9, theme: "cyberpunk" },
+    { id: 10, theme: "valentine" },
+    { id: 11, theme: "halloween" },
+    { id: 12, theme: "garden" },
+    { id: 13, theme: "forest" },
+    { id: 14, theme: "aqua" },
+    { id: 15, theme: "lofi" },
+    { id: 16, theme: "pastel" },
+    { id: 17, theme: "fantasy" },
+    { id: 18, theme: "wireframe" },
+    { id: 19, theme: "black" },
+    { id: 20, theme: "luxury" },
+    { id: 21, theme: "dracula" },
+    { id: 22, theme: "cmyk" },
+    { id: 23, theme: "autumn" },
+    { id: 24, theme: "business" },
+    { id: 25, theme: "acid" },
+    { id: 26, theme: "lemonade" },
+    { id: 27, theme: "night" },
+    { id: 28, theme: "coffee" },
+    { id: 29, theme: "winter" },
+    { id: 30, theme: "dim" },
+    { id: 31, theme: "nord" },
+    { id: 32, theme: "sunset" },
 ];
 
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const themeParam = urlParams.get('theme')
-if (themeParam != null && themes.find((item) => themeParam === item)) {
+if (themeParam != null && themes.find((item) => themeParam === item.theme)) {
     saveTheme(themeParam);
 }
 
@@ -58,10 +58,11 @@ themes.map((theme) => {
     const inputNode = document.createElement('input');
     inputNode.setAttribute('type', 'radio');
     inputNode.setAttribute('name', 'theme-dropdown');
+    inputNode.setAttribute('id', `theme-${theme.id}`);
     inputNode.setAttribute('class', 'theme-controller m-1 btn text-base-content btn-sm btn-block rounded-md btn-ghost justify-start');
-    inputNode.setAttribute('onclick', `saveTheme('${theme}')`);
-    inputNode.setAttribute('aria-label', theme.charAt(0).toUpperCase() + theme.slice(1));
-    inputNode.setAttribute('value', theme);
+    inputNode.setAttribute('onclick', `saveTheme('${theme.theme}')`);
+    inputNode.setAttribute('aria-label', theme.theme.charAt(0).toUpperCase() + theme.theme.slice(1));
+    inputNode.setAttribute('value', theme.theme);
     liNode.appendChild(inputNode);
     themeList.appendChild(liNode)
 });
@@ -69,6 +70,9 @@ themes.map((theme) => {
 
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme != null) {
+    const theme = themes.find((item) => currentTheme === item.theme)
+    const themeElement = document.getElementById(`theme-${theme.id}`);
+    themeElement.setAttribute('class', 'bg-primary theme-controller m-1 btn text-base-100 btn-sm btn-block rounded-md btn-ghost justify-start');
     htmlElement.setAttribute("data-theme", currentTheme);
     selectedThemeName.innerText = currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
     updateURLParameter('theme', currentTheme)
@@ -118,6 +122,12 @@ loadFavorite(JSON.parse(localStorage.getItem("favorite-meme")));
 
 
 function saveTheme(data) {
+    const currentTheme = localStorage.getItem('theme');
+    const theme = themes.find((item) => currentTheme === item.theme)
+    const themeElement = document.getElementById(`theme-${theme.id}`);
+    if (themeElement != null) {
+        themeElement.setAttribute('class', 'theme-controller m-1 btn text-base-content btn-sm btn-block rounded-md btn-ghost justify-start');
+    }
     htmlElement.setAttribute("data-theme", data);
     selectedThemeName.innerText = data.charAt(0).toUpperCase() + data.slice(1);
     localStorage.setItem('theme', data);
