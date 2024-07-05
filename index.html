@@ -15,11 +15,12 @@
 <body>
 
   <!-- Main Body -->
-  <main class="grid grid-cols-[300px_1fr] gap-2">
-    <div class="h-screen grid grid-rows-[64px_1fr]">
+  <main class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-2">
+    <div class="h-screen hidden md:visible md:grid md:grid-rows-[64px_1fr]">
       <div class="navbar bg-base-100">
-        <div class="navbar-start">
-          <a class="btn btn-ghost text-base-content text-xl">Meme</a>
+        <div class="flex items-center gap-2">
+          <img src="/image/meme-logo.png" width="45px" height="45px" alt="logo">
+          <a class="text-base-content text-md font-semibold">Favorite Meme</a>
         </div>
       </div>
 
@@ -44,46 +45,105 @@
     </div>
 
     <div class="h-screen grid grid-rows-[64px_1fr]">
-      <div class="navbar p-0 bg-base-100 pr-1">
-        <div class="navbar-center hidden lg:flex">
-          <label class="w-[500px] input input-bordered flex items-center gap-2">
-            <input id="meme-search" type="text" class="grow text-base-content" placeholder="Search" />
-            <p id="error-search" class="text-red-400"></p>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-              class="h-4 w-4 opacity-70 text-base-content">
-              <path fill-rule="evenodd"
-                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                clip-rule="evenodd" />
-            </svg>
-        </div>
+      <div class="flex gap-2 items-center justify-between p-0 bg-base-100 pr-1">
+        <div class="flex gap-2 items-center w-full">
+          <div class="w-[45px] h-[45px] ml-2 flex items-center gap-2 md:hidden">
+            <img src="/image/meme-logo.png" width="45px" height="45px" alt="logo">
+          </div>
 
-        <div class="navbar-end w-full">
-          <div class="theme-changer">
-            <div class="dropdown dropdown-end">
-              <div tabindex="0" role="button" class="btn m-1 p-2 border border-gray-300 rounded-md">
-                <i class="fa-solid fa-palette"></i>
-                <p id="selected-theme-name">Theme</p>
+          <div class="relative w-full px-2 sm:px-0">
+            <div class="flex flex-col gap-1">
+              <label class="max-w-[600px] w-full input input-bordered flex items-center gap-2">
+                <input id="meme-search" type="text" class="grow w-full text-base-content" placeholder="Search" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                  class="h-4 w-4 opacity-70 text-base-content">
+                  <path fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clip-rule="evenodd" />
+                </svg>
+              </label>
+              <p id="error-search" class="text-red-400 text-xs sm:text-md absolute bottom-[2px] left-4"></p>
+            </div>
+          </div>
+        </div>
+        <div class="mr-1">
+          <div class="theme-changer flex gap-1 text-end">
+            <div class="dropdown dropdown-end w-max">
+              <div tabindex="0" role="button" class="btn p-2 border border-gray-300 rounded-md">
+                <div class="w-4 h-4 p-1 rounded-sm bg-primary hidden md:block">
+                  <div class="w-2 h-2 rounded-sm bg-base-100"></div>
+                </div>
+                <p id="selected-theme-name" class="hidden md:block">Theme</p>
+                <div id="selected-theme-name" class="w-4 h-4 p-1 rounded-sm bg-primary md:hidden">
+                  <div class="w-2 h-2 rounded-sm bg-base-100"></div>
+                </div>
                 <svg width="12px" height="12px" class="inline-block h-2 w-2 fill-current opacity-60"
                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
                   <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
                 </svg>
               </div>
               <ul tabindex="0" id="theme-list"
-                class="border border-primary-content dropdown-content bg-base-300 rounded-md z-[1] w-52 h-[40vh] overflow-auto p-2 shadow-2xl">
+                class="border m-[1px] border-primary-content dropdown-content bg-base-300 rounded-md z-[1] w-52 h-[40vh] overflow-auto p-2 shadow-2xl">
               </ul>
             </div>
+
+            <div class="drawer-end flex justify-center items-center md:hidden">
+              <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+              <div class="drawer-content">
+                <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    class="inline-block h-6 w-6 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </label>
+              </div>
+              <div class="drawer-side z-50">
+                <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+
+                <div class="menu bg-base-200 text-base-content min-h-full w-80 p-4 grid grid-rows-[70px_1fr]">
+                  <div class="navbar-center flex">
+                    <label class="w-full input input-bordered flex items-center gap-2">
+                      <input id="favorite-memes-search-mobail" type="text" class="grow text-base-content"
+                        placeholder="Search" />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                        class="h-4 w-4 opacity-70 text-base-content">
+                        <path fill-rule="evenodd"
+                          d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </label>
+                  </div>
+                  <div class="overflow-auto">
+                    <div id="favorite-meme-list-mobail" class="flex flex-col gap-2 h-full">
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+            </div>
+
           </div>
+
+
         </div>
       </div>
+
 
       <div id="meme-container" class="flex overflow-auto justify-center align-middle bg-base-300 mr-2 mb-2 rounded-md">
         <div class="p-5 w-full">
           <p class="font-semibold mb-5 text-2xl">Memes Feed</p>
-          <div id="meme-list" class="grid grid-cols-3 gap-4 pb-4">
+          <div id="meme-list" class="grid grid-cols-1 xxs:sm:grid-cols-2 sm:grid-cols-3 gap-4 pb-4">
           </div>
         </div>
       </div>
     </div>
+
+
+
   </main>
 
   <dialog id="api_key_modal" class="modal">

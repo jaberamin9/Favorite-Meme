@@ -4,8 +4,11 @@ const selectedThemeName = document.getElementById('selected-theme-name');
 const memeContainer = document.getElementById('meme-container');
 const apiKeySaveBtn = document.getElementById('api-key-save-btn');
 const favoriteMemeList = document.getElementById('favorite-meme-list');
+const favoriteMemeListMobail = document.getElementById('favorite-meme-list-mobail');
 const memeSearch = document.getElementById('meme-search');
 const favoriteMemesSearch = document.getElementById('favorite-memes-search');
+const favoriteMemesSearchMobail = document.getElementById('favorite-memes-search-mobail');
+
 const errorSearch = document.getElementById('error-search');
 
 let timeoutId;
@@ -44,6 +47,7 @@ const themes = [
     { id: 31, theme: "nord" },
     { id: 32, theme: "sunset" },
 ];
+
 
 
 const queryString = window.location.search;
@@ -123,10 +127,12 @@ loadFavorite(JSON.parse(localStorage.getItem("favorite-meme")));
 
 function saveTheme(data) {
     const currentTheme = localStorage.getItem('theme');
-    const theme = themes.find((item) => currentTheme === item.theme)
-    const themeElement = document.getElementById(`theme-${theme.id}`);
-    if (themeElement != null) {
-        themeElement.setAttribute('class', 'theme-controller m-1 btn text-base-content btn-sm btn-block rounded-md btn-ghost justify-start');
+    if (currentTheme != null) {
+        const theme = themes.find((item) => currentTheme === item.theme)
+        const themeElement = document.getElementById(`theme-${theme.id}`);
+        if (themeElement != null) {
+            themeElement.setAttribute('class', 'theme-controller m-1 btn text-base-content btn-sm btn-block rounded-md btn-ghost justify-start');
+        }
     }
     htmlElement.setAttribute("data-theme", data);
     selectedThemeName.innerText = data.charAt(0).toUpperCase() + data.slice(1);
@@ -211,6 +217,8 @@ async function fetchMemess(searchTerm) {
 }
 function displayMemes(data) {
     const memeList = document.getElementById('meme-list');
+    memeList.setAttribute('class', 'grid grid-cols-1 xxs:grid-cols-2 lg:grid-cols-3 gap-4 pb-4');
+
     memeList.innerHTML = '';
 
     data.memes.forEach(meme => {
@@ -311,70 +319,91 @@ favoriteMemesSearch.addEventListener("input", (event) => {
     );
     loadFavorite(filteredMemes);
 });
+favoriteMemesSearchMobail.addEventListener("input", (event) => {
+    const searchTerm = event.target.value.trim().toLowerCase();
 
+    const favoriteMemes = JSON.parse(localStorage.getItem("favorite-meme"));
+
+    let filteredMemes = favoriteMemes.filter(meme =>
+        meme.description.toLowerCase().includes(searchTerm)
+    );
+    loadFavorite(filteredMemes);
+});
 
 function loadFavorite(memes) {
     if (memes != null && memes.length > 0) {
         favoriteMemeList.innerHTML = '';
-        memes.forEach(meme => {
-            var node_1 = document.createElement('div');
-            node_1.setAttribute('class', 'flex gap-2 items-center bg-base-100 rounded-md p-2 cursor-pointer');
+        favoriteMemeListMobail.innerHTML = '';
 
-            var node_2 = document.createElement('div');
-            node_2.setAttribute('class', 'w-[100px] h-[70px] rounded-md overflow-clip');
-            node_1.appendChild(node_2);
-
-            var node_3 = document.createElement('img');
-            node_3.setAttribute('class', 'object-cover w-full h-full');
-            node_3.alt = "img";
-            node_3.src = meme.url;
-            node_3.setAttribute('referrerpolicy', 'no-referrer');
-            node_2.appendChild(node_3);
-
-            var node_4 = document.createElement('div');
-            node_4.setAttribute('class', 'flex gap-2 w-full items-center');
-            node_1.appendChild(node_4);
-
-            var node_5 = document.createElement('h4');
-            node_5.setAttribute('class', 'font-semibold w-full text-sm line-clamp-2');
-            node_4.appendChild(node_5);
-
-            var node_6 = document.createTextNode(limitToFirst12Words(meme.description));
-            node_5.appendChild(node_6);
-
-            var node_7 = document.createElement('div');
-            node_7.setAttribute('class', 'flex flex-col gap-1 justify-end');
-            node_4.appendChild(node_7);
-
-            var node_8 = document.createElement('div');
-            node_8.setAttribute('onclick', `downloadImage('${meme.url}')`);
-            node_8.setAttribute('class', 'hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
-            node_7.appendChild(node_8);
-
-            var node_9 = document.createElement('i');
-            node_9.setAttribute('class', 'fa-regular fa-floppy-disk');
-            node_9.setAttribute('size', '12px');
-            node_8.appendChild(node_9);
-
-            var node_10 = document.createElement('div');
-            node_10.setAttribute('onclick', `deleteFavorite('${meme.id}')`);
-            node_10.setAttribute('class', 'hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
-            node_7.appendChild(node_10);
-
-            var node_11 = document.createElement('i');
-            node_11.setAttribute('class', 'fa-regular fa-trash-can');
-            node_10.appendChild(node_11);
-
-            favoriteMemeList.appendChild(node_1);
-        })
+        loadFavoriteMemeItem(memes, favoriteMemeList);
+        loadFavoriteMemeItem(memes, favoriteMemeListMobail);
     } else {
-        favoriteMemeList.innerHTML = "";
-        const pNode = document.createElement('p');
-        pNode.setAttribute('class', 'flex items-center justify-center h-full');
-        const text = document.createTextNode("you have no favorite memes");
-        pNode.appendChild(text);
-        favoriteMemeList.appendChild(pNode);
+        notStoreFavoriteMemeItem(favoriteMemeList);
+        notStoreFavoriteMemeItem(favoriteMemeListMobail);
     }
+}
+
+function loadFavoriteMemeItem(memes, memeList) {
+    memes.forEach(meme => {
+        var node_1 = document.createElement('div');
+        node_1.setAttribute('class', 'flex gap-2 items-center bg-base-100 rounded-md p-2 cursor-pointer');
+
+        var node_2 = document.createElement('div');
+        node_2.setAttribute('class', 'w-[100px] h-[70px] rounded-md overflow-clip');
+        node_1.appendChild(node_2);
+
+        var node_3 = document.createElement('img');
+        node_3.setAttribute('class', 'object-cover w-full h-full');
+        node_3.alt = "img";
+        node_3.src = meme.url;
+        node_3.setAttribute('referrerpolicy', 'no-referrer');
+        node_2.appendChild(node_3);
+
+        var node_4 = document.createElement('div');
+        node_4.setAttribute('class', 'flex gap-2 w-full items-center');
+        node_1.appendChild(node_4);
+
+        var node_5 = document.createElement('h4');
+        node_5.setAttribute('class', 'font-semibold w-full text-left text-sm line-clamp-2');
+        node_4.appendChild(node_5);
+
+        var node_6 = document.createTextNode(limitToFirst12Words(meme.description));
+        node_5.appendChild(node_6);
+
+        var node_7 = document.createElement('div');
+        node_7.setAttribute('class', 'flex flex-col gap-1 justify-end');
+        node_4.appendChild(node_7);
+
+        var node_8 = document.createElement('div');
+        node_8.setAttribute('onclick', `downloadImage('${meme.url}')`);
+        node_8.setAttribute('class', 'hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
+        node_7.appendChild(node_8);
+
+        var node_9 = document.createElement('i');
+        node_9.setAttribute('class', 'fa-regular fa-floppy-disk');
+        node_9.setAttribute('size', '12px');
+        node_8.appendChild(node_9);
+
+        var node_10 = document.createElement('div');
+        node_10.setAttribute('onclick', `deleteFavorite('${meme.id}')`);
+        node_10.setAttribute('class', 'hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
+        node_7.appendChild(node_10);
+
+        var node_11 = document.createElement('i');
+        node_11.setAttribute('class', 'fa-regular fa-trash-can');
+        node_10.appendChild(node_11);
+
+        memeList.appendChild(node_1);
+    })
+}
+
+function notStoreFavoriteMemeItem(memeList) {
+    memeList.innerHTML = '';
+    const pNode = document.createElement('p');
+    pNode.setAttribute('class', 'flex items-center justify-center h-full');
+    const text = document.createTextNode("you have no favorite memes");
+    pNode.appendChild(text);
+    memeList.appendChild(pNode);
 }
 
 function addToFavorite(meme) {

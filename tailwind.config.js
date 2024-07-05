@@ -3,6 +3,15 @@ module.exports = {
   content: ["./**/*.{html,js}"],
   theme: {
     extend: {},
+    screens: {
+      'xxxs': '200px',
+      'xxs': '540px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    }
   },
   plugins: [
     require('daisyui'),
