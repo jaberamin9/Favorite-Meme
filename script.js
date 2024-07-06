@@ -416,6 +416,7 @@ function addToFavorite(meme) {
         memes.push(meme);
         localStorage.setItem("favorite-meme", JSON.stringify(memes));
         loadFavorite(JSON.parse(localStorage.getItem("favorite-meme")));
+        favoriteMemeList.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'end' })
     }
 }
 
