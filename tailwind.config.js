@@ -18,6 +18,14 @@ module.exports = {
   ],
   daisyui: {
     themes: [
+      {
+        default: {
+          "primary": "#9900FF",
+          "secondary": "#ffffff",
+          "base-100": "#ffffff",
+          "base-300": "#F0F0F0",
+        },
+      },
       "light",
       "dark",
       "cupcake",

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="dark" lang="en">
+<html data-theme="default" lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -72,8 +72,8 @@
           <div class="theme-changer flex gap-1 text-end">
             <div class="dropdown dropdown-end w-max">
               <div tabindex="0" role="button" class="btn p-2 border border-gray-300 rounded-md">
-                <div class="w-4 h-4 p-1 rounded-sm bg-primary hidden md:block">
-                  <div class="w-2 h-2 rounded-sm bg-base-100"></div>
+                <div class="w-4 h-4 p-1 rounded-sm bg-primary-content hidden md:block">
+                  <div class="w-2 h-2 rounded-sm bg-primary"></div>
                 </div>
                 <p id="selected-theme-name" class="hidden md:block">Theme</p>
                 <div id="selected-theme-name" class="w-4 h-4 p-1 rounded-sm bg-primary md:hidden">
@@ -164,7 +164,7 @@
         <input id="api-key-text" type="password" class="grow" value="" placeholder="insert your api key" />
       </label>
       <form method="dialog">
-        <button id="api-key-save-btn" class="btn bg-base-300 w-full">Save</button>
+        <button id="api-key-save-btn" class="btn btn-primary w-full">Save</button>
       </form>
     </div>
   </dialog>
@@ -179,12 +179,13 @@
       </label>
       <div class="modal-action">
         <form method="dialog">
-          <button id="save-btn" class="btn">Save</button>
+          <button class="btn">Cancel</button>
+          <button id="save-btn" class="btn btn-primary">Save</button>
         </form>
       </div>
     </div>
   </dialog>
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 
 </html>

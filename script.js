@@ -14,6 +14,7 @@ const errorSearch = document.getElementById('error-search');
 let timeoutId;
 
 const themes = [
+    { id: 0, theme: "default" },
     { id: 1, theme: "light" },
     { id: 2, theme: "dark" },
     { id: 3, theme: "cupcake" },
@@ -47,7 +48,6 @@ const themes = [
     { id: 31, theme: "nord" },
     { id: 32, theme: "sunset" },
 ];
-
 
 
 const queryString = window.location.search;
@@ -104,7 +104,7 @@ if (localStorage.getItem('api-key') == null && demoParam != 'true') {
     divNode.appendChild(pNode);
 
     const buttonNode = document.createElement('button');
-    buttonNode.setAttribute('class', 'btn btn-neutral');
+    buttonNode.setAttribute('class', 'btn btn-primary ');
 
     const buttonTextNode = document.createTextNode("Provide API key");
     buttonNode.appendChild(buttonTextNode);
@@ -266,7 +266,7 @@ function errorMsg(memeList, msg, code) {
     divNode.setAttribute('class', 'w-full flex flex-col justify-center items-center p-5');
 
     const h1Node = document.createElement('h1');
-    h1Node.setAttribute('class', 'text-5xl text-red-400 mb-4');
+    h1Node.setAttribute('class', 'text-5xl text-error mb-4');
     divNode.appendChild(h1Node);
 
     const codeTextNode = document.createTextNode(code);
@@ -281,7 +281,7 @@ function errorMsg(memeList, msg, code) {
 
     if (code == 402 || code == 401) {
         const buttonNode = document.createElement('button');
-        buttonNode.setAttribute('class', 'btn bg-base-100 mt-4 hover:bg-base-200');
+        buttonNode.setAttribute('class', 'btn btn-primary mt-4');
         buttonNode.setAttribute('onclick', "api_key_modal.showModal()");
         divNode.appendChild(buttonNode);
 
