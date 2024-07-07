@@ -11215,6 +11215,14 @@ html:has(.drawer-open.drawer-open) {
   grid-template-columns: 3fr 1fr;
 }
 
+.grid-cols-\[5fr_1fr\] {
+  grid-template-columns: 5fr 1fr;
+}
+
+.grid-cols-\[4fr_1fr\] {
+  grid-template-columns: 4fr 1fr;
+}
+
 .grid-rows-\[30px_1fr\] {
   grid-template-rows: 30px 1fr;
 }
@@ -11931,6 +11939,11 @@ html:has(.drawer-open.drawer-open) {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-base-content {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
 }
 
 .bg-gradient-to-t {
