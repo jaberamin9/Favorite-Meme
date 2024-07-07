@@ -10845,6 +10845,10 @@ html:has(.drawer-open.drawer-open) {
   width: 240px;
 }
 
+.w-\[200px\] {
+  width: 200px;
+}
+
 .max-w-\[600px\] {
   max-width: 600px;
 }
