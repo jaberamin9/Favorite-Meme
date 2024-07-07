@@ -10841,6 +10841,10 @@ html:has(.drawer-open.drawer-open) {
   width: max-content;
 }
 
+.w-\[240px\] {
+  width: 240px;
+}
+
 .max-w-\[600px\] {
   max-width: 600px;
 }
@@ -11201,6 +11205,10 @@ html:has(.drawer-open.drawer-open) {
 
 .grid-cols-\[60px_1fr\] {
   grid-template-columns: 60px 1fr;
+}
+
+.grid-cols-\[3fr_1fr\] {
+  grid-template-columns: 3fr 1fr;
 }
 
 .grid-rows-\[30px_1fr\] {
