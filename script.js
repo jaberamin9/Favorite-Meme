@@ -8,6 +8,8 @@ const favoriteMemeListMobail = document.getElementById('favorite-meme-list-mobai
 const memeSearch = document.getElementById('meme-search');
 const favoriteMemesSearch = document.getElementById('favorite-memes-search');
 const favoriteMemesSearchMobail = document.getElementById('favorite-memes-search-mobail');
+const customizeBtn = document.getElementById('customize-btn');
+
 
 const errorSearch = document.getElementById('error-search');
 
@@ -96,7 +98,7 @@ if (localStorage.getItem('api-key') == null && demoParam != 'true') {
     memeContainer.innerHTML = '';
 
     const divNode = document.createElement('div');
-    divNode.setAttribute('class', 'flex flex-col justify-center gap-4 align-middle p-5');
+    divNode.setAttribute('class', 'main-text flex flex-col justify-center gap-4 align-middle p-5');
 
     const pNode = document.createElement('p');
     const pTextNode = document.createTextNode("We could not find the API key. Please provide the API key and enjoy the meme.");
@@ -121,9 +123,7 @@ apiKeySaveBtn.addEventListener("click", () => {
     searchMemes("computer");
 })
 
-
 loadFavorite(JSON.parse(localStorage.getItem("favorite-meme")));
-
 
 function saveTheme(data) {
     const currentTheme = localStorage.getItem('theme');
@@ -172,7 +172,7 @@ function searchMemes(searchTerm) {
             const memes = await fetchMemess(searchTerm);
             memeContainer.innerHTML =
                 `<div class="p-5 w-full">
-                    <p class="font-semibold mb-5 text-2xl">Memes Feed</p>
+                    <p class="main-text font-semibold mb-5 text-2xl">Memes Feed</p>
                     <div id="meme-list" class="grid grid-cols-3 gap-4 pb-4">
                     </div>
                 </div>`;
@@ -273,7 +273,7 @@ function errorMsg(memeList, msg, code) {
     h1Node.appendChild(codeTextNode);
 
     const pNode = document.createElement('p');
-    pNode.setAttribute('class', 'text-center');
+    pNode.setAttribute('class', 'text-center main-text');
     divNode.appendChild(pNode);
 
     const msgTextNode = document.createTextNode(msg);
@@ -345,62 +345,62 @@ function loadFavorite(memes) {
 
 function loadFavoriteMemeItem(memes, memeList) {
     memes.forEach(meme => {
-        var node_1 = document.createElement('div');
-        node_1.setAttribute('class', 'flex gap-2 items-center bg-base-100 rounded-md p-2 cursor-pointer');
+        var nodeDiv = document.createElement('div');
+        nodeDiv.setAttribute('class', 'side-bar-forground flex gap-2 items-center bg-base-100 rounded-md p-2 cursor-pointer');
 
-        var node_2 = document.createElement('div');
-        node_2.setAttribute('class', 'w-[100px] h-[70px] rounded-md overflow-clip');
-        node_1.appendChild(node_2);
+        var nodeDiv2 = document.createElement('div');
+        nodeDiv2.setAttribute('class', 'w-[100px] h-[70px] rounded-md overflow-clip');
+        nodeDiv.appendChild(nodeDiv2);
 
-        var node_3 = document.createElement('img');
-        node_3.setAttribute('class', 'object-cover w-full h-full');
-        node_3.alt = "img";
-        node_3.src = meme.url;
-        node_3.setAttribute('referrerpolicy', 'no-referrer');
-        node_2.appendChild(node_3);
+        var nodeImg = document.createElement('img');
+        nodeImg.setAttribute('class', 'object-cover w-full h-full');
+        nodeImg.alt = "img";
+        nodeImg.src = meme.url;
+        nodeImg.setAttribute('referrerpolicy', 'no-referrer');
+        nodeDiv2.appendChild(nodeImg);
 
-        var node_4 = document.createElement('div');
-        node_4.setAttribute('class', 'flex gap-2 w-full items-center');
-        node_1.appendChild(node_4);
+        var nodeDiv4 = document.createElement('div');
+        nodeDiv4.setAttribute('class', 'flex gap-2 w-full items-center');
+        nodeDiv.appendChild(nodeDiv4);
 
-        var node_5 = document.createElement('h4');
-        node_5.setAttribute('class', 'font-semibold w-full text-left text-sm line-clamp-2');
-        node_4.appendChild(node_5);
+        var nodeH4 = document.createElement('h4');
+        nodeH4.setAttribute('class', 'side-bar-text font-semibold w-full text-left text-sm line-clamp-2');
+        nodeDiv4.appendChild(nodeH4);
 
-        var node_6 = document.createTextNode(limitToFirst12Words(meme.description));
-        node_5.appendChild(node_6);
+        var nodeH4Text = document.createTextNode(limitToFirst12Words(meme.description));
+        nodeH4.appendChild(nodeH4Text);
 
-        var node_7 = document.createElement('div');
-        node_7.setAttribute('class', 'flex flex-col gap-1 justify-end');
-        node_4.appendChild(node_7);
+        var nodeDiv7 = document.createElement('div');
+        nodeDiv7.setAttribute('class', 'flex flex-col gap-1 justify-end');
+        nodeDiv4.appendChild(nodeDiv7);
 
-        var node_8 = document.createElement('div');
-        node_8.setAttribute('onclick', `downloadImage('${meme.url}')`);
-        node_8.setAttribute('class', 'hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
-        node_7.appendChild(node_8);
+        var nodeDiv8 = document.createElement('div');
+        nodeDiv8.setAttribute('onclick', `downloadImage('${meme.url}')`);
+        nodeDiv8.setAttribute('class', 'side-bar-bg hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
+        nodeDiv7.appendChild(nodeDiv8);
 
-        var node_9 = document.createElement('i');
-        node_9.setAttribute('class', 'fa-regular fa-floppy-disk');
-        node_9.setAttribute('size', '12px');
-        node_8.appendChild(node_9);
+        var nodeI = document.createElement('i');
+        nodeI.setAttribute('class', 'side-bar-text fa-regular fa-floppy-disk');
+        nodeI.setAttribute('size', '12px');
+        nodeDiv8.appendChild(nodeI);
 
-        var node_10 = document.createElement('div');
-        node_10.setAttribute('onclick', `deleteFavorite('${meme.id}')`);
-        node_10.setAttribute('class', 'hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
-        node_7.appendChild(node_10);
+        var nodeDiv10 = document.createElement('div');
+        nodeDiv10.setAttribute('onclick', `deleteFavorite('${meme.id}')`);
+        nodeDiv10.setAttribute('class', 'side-bar-bg hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
+        nodeDiv7.appendChild(nodeDiv10);
 
-        var node_11 = document.createElement('i');
-        node_11.setAttribute('class', 'fa-regular fa-trash-can');
-        node_10.appendChild(node_11);
+        var nodeI2 = document.createElement('i');
+        nodeI2.setAttribute('class', 'side-bar-text fa-regular fa-trash-can');
+        nodeDiv10.appendChild(nodeI2);
 
-        memeList.appendChild(node_1);
+        memeList.appendChild(nodeDiv);
     })
 }
 
 function notStoreFavoriteMemeItem(memeList) {
     memeList.innerHTML = '';
     const pNode = document.createElement('p');
-    pNode.setAttribute('class', 'flex items-center justify-center h-full');
+    pNode.setAttribute('class', 'side-bar-text flex items-center justify-center h-full');
     const text = document.createTextNode("you have no favorite memes");
     pNode.appendChild(text);
     memeList.appendChild(pNode);
@@ -454,8 +454,8 @@ function downloadImage(imageUrl) {
 
 function limitToFirst12Words(str) {
     const words = str.split(' ');
-    const first10Words = words.slice(0, 12);
-    const limitedString = first10Words.join(' ');
+    const first12Words = words.slice(0, 12);
+    const limitedString = first12Words.join(' ');
     return limitedString;
 }
 
@@ -463,4 +463,150 @@ function updateURLParameter(param, value) {
     const url = new URL(window.location);
     url.searchParams.set(param, value);
     history.replaceState(null, '', url.toString());
+}
+
+
+//customize theme
+
+customizeBtn.addEventListener("click", () => {
+    opencustomizeModal()
+})
+function opencustomizeModal() {
+    const customizeThemeModal = document.getElementById('customize_theme_modal');
+    const colorPicker = document.getElementById('fixed')
+    const closeBtn = document.getElementById('customize-close-btn')
+    const reloadButton = document.getElementById('reload-btn')
+
+    colorPicker.classList.remove('invisible');
+    colorPicker.classList.add('visible');
+
+    reloadButton.addEventListener('click', function () {
+        location.reload();
+    });
+    closeBtn.onclick = () => {
+        colorPicker.classList.remove('visible');
+        colorPicker.classList.add('invisible');
+    };
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' || event.key === 'Esc') {
+            colorPicker.classList.remove('visible');
+            colorPicker.classList.add('invisible');
+        }
+    });
+
+    customizeThemeModal.showModal();
+}
+let radioBtn = 'baground';
+let currentSelectedBox = -1;
+const parentFixed = document.querySelector("#fixed"),
+    pickerFixed = new Picker({
+        parent: parentFixed,
+        popup: false,
+        alpha: true,
+        editor: true,
+        color: "orangered",
+        onChange: function (color) {
+            const selectedElement = document.getElementById('selected');
+            if (selectedElement) {
+
+                if (radioBtn === 'baground') {
+                    selectedElement.style.backgroundColor = color.rgbaString;
+                    if (currentSelectedBox === 0) {
+                        document.querySelectorAll('.nav-bar-bg').forEach(el => {
+                            el.style.backgroundColor = color.rgbaString
+                        });
+                    } else if (currentSelectedBox === 1) {
+                        document.querySelectorAll('.side-bar-bg').forEach(el => {
+                            el.style.backgroundColor = color.rgbaString
+                        });
+                    } else {
+                        document.querySelectorAll('.main-bg').forEach(el => {
+                            el.style.backgroundColor = color.rgbaString
+                        });
+                    }
+                } else if (radioBtn === 'text') {
+                    selectedElement.style.color = color.rgbaString;
+                    if (currentSelectedBox === 0) {
+                        document.querySelectorAll('.nav-bar-text').forEach(el => {
+                            el.style.color = color.rgbaString;
+                            el.style.borderColor = color.rgbaString;
+                        });
+                    } else if (currentSelectedBox === 1) {
+                        document.querySelectorAll('.side-bar-text').forEach(el => {
+                            el.style.color = color.rgbaString;
+                            el.style.borderColor = color.rgbaString;
+                        });
+                    } else {
+                        document.querySelectorAll('.main-text').forEach(el => {
+                            el.style.color = color.rgbaString;
+                            el.style.borderColor = color.rgbaString;
+                        });
+                    }
+                } else if (radioBtn === 'btn') {
+                    document.querySelectorAll('.btn-primary').forEach(el => {
+                        el.style.backgroundColor = color.rgbaString;
+                        el.style.borderColor = color.rgbaString;
+                    });
+                } else if (radioBtn === 'forground') {
+                    document.querySelectorAll('.side-bar-forground').forEach(el => {
+                        el.style.backgroundColor = color.rgbaString;
+                    });
+                }
+            }
+        }
+    });
+
+document.querySelectorAll('.my-box').forEach((selectedBox, index) => {
+    selectedBox.addEventListener('click', function () {
+        currentSelectedBox = index;
+        const element = document.getElementById('label-id');
+        if (element) {
+            element.remove();
+        }
+        if (index !== 0) {
+            var nodeLabel = document.createElement('label');
+            nodeLabel.setAttribute('class', 'label w-full cursor-pointer');
+            nodeLabel.setAttribute('id', 'label-id');
+
+            var nodeSpan = document.createElement('span');
+            nodeSpan.setAttribute('class', 'label-text');
+            nodeLabel.appendChild(nodeSpan);
+
+            var nodeText;
+            if (index === 1) {
+                nodeText = document.createTextNode("Forground");
+            } else {
+                nodeText = document.createTextNode("Button");
+            }
+            nodeSpan.appendChild(nodeText);
+
+            var nodeInput = document.createElement('input');
+            nodeInput.setAttribute('type', 'radio');
+            nodeInput.setAttribute('name', 'radio-1');
+            if (index === 1) {
+                nodeInput.setAttribute('value', 'forground');
+            } else {
+                nodeInput.setAttribute('value', 'btn');
+            }
+            nodeInput.setAttribute('class', 'radio checked:bg-primary');
+            nodeLabel.appendChild(nodeInput);
+
+            document.getElementById('radio-btn-container').appendChild(nodeLabel)
+            getRadioBtn();
+        }
+        document.querySelectorAll('.my-box').forEach(otherBox => {
+            otherBox.classList.remove('border-2', 'border-blue-500');
+            otherBox.removeAttribute('id');
+        });
+        this.classList.add('border-2', 'border-blue-500');
+        this.setAttribute('id', 'selected');
+    });
+});
+getRadioBtn();
+function getRadioBtn() {
+    document.querySelectorAll('.radio').forEach(radio => {
+        radio.addEventListener('click', function () {
+            radioBtn = this.value
+        });
+    });
 }

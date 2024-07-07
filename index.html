@@ -10,27 +10,29 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
 
   <!-- Main Body -->
-  <main class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-2">
+  <main class="nav-bar-bg grid grid-cols-1 md:grid-cols-[300px_1fr] gap-2 bg-base-100">
     <div class="h-screen hidden md:visible md:grid md:grid-rows-[64px_1fr]">
-      <div class="navbar bg-base-100">
+      <div class="nav-bar-bg navbar bg-base-100">
         <div class="flex items-center gap-2">
           <img src="https://raw.githubusercontent.com/jaberamin9/Favorite-Meme/main/image/meme-logo.png" width="45px"
             height="45px" alt="logo">
-          <a class="text-base-content text-md font-semibold">Favorite Meme</a>
+          <a class="text-base-content nav-bar-text text-md font-semibold">Favorite Meme</a>
         </div>
       </div>
 
-      <div class="bg-base-300 ml-2 mb-2 h-auto overflow-auto rounded-md p-3 grid grid-rows-[70px_1fr]">
+      <div class="side-bar-bg bg-base-300 ml-2 mb-2 h-auto overflow-auto rounded-md p-3 grid grid-rows-[70px_1fr]">
         <div class="navbar-center flex">
-          <label class="w-full input input-bordered flex items-center gap-2">
-            <input id="favorite-memes-search" type="text" class="grow text-base-content" placeholder="Search" />
+          <label class="side-bar-forground side-bar-text w-full input input-bordered flex items-center gap-2">
+            <input id="favorite-memes-search" type="text" class="side-bar-text grow text-base-content"
+              placeholder="Search" />
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-              class="h-4 w-4 opacity-70 text-base-content">
+              class="side-bar-text h-4 w-4 opacity-70 text-base-content">
               <path fill-rule="evenodd"
                 d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                 clip-rule="evenodd" />
@@ -46,7 +48,7 @@
     </div>
 
     <div class="h-screen grid grid-rows-[64px_1fr] ml-2 md:ml-0">
-      <div class="flex gap-2 items-center justify-between p-0 bg-base-100 pr-1">
+      <div class="nav-bar-bg nav-bar-text flex gap-2 items-center justify-between p-0 bg-base-100 pr-2">
         <div class="flex gap-2 items-center w-full">
           <div class="w-[45px] h-[45px] ml-2 flex items-center gap-2 md:hidden">
             <img src="https://raw.githubusercontent.com/jaberamin9/Favorite-Meme/main/image/meme-logo.png" width="45px"
@@ -55,10 +57,11 @@
 
           <div class="relative w-full px-2 sm:px-0">
             <div class="flex flex-col gap-1">
-              <label class="max-w-[600px] w-full input input-bordered flex items-center gap-2">
-                <input id="meme-search" type="text" class="grow w-full text-base-content" placeholder="Search" />
+              <label class="nav-bar-bg nav-bar-text max-w-[600px] w-full input input-bordered flex items-center gap-2">
+                <input id="meme-search" type="text" class="nav-bar-text grow w-full text-base-content"
+                  placeholder="Search" />
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-                  class="h-4 w-4 opacity-70 text-base-content">
+                  class="nav-bar-text h-4 w-4 opacity-70 text-base-content">
                   <path fill-rule="evenodd"
                     d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                     clip-rule="evenodd" />
@@ -68,10 +71,10 @@
             </div>
           </div>
         </div>
-        <div class="mr-1">
+        <div class="">
           <div class="theme-changer flex gap-1 text-end">
             <div class="dropdown dropdown-end w-max">
-              <div tabindex="0" role="button" class="btn p-2 border border-gray-300 rounded-md">
+              <div tabindex="0" role="button" class="nav-bar-bg nav-bar-text btn p-2 border border-gray-300 rounded-md">
                 <div class="w-4 h-4 p-1 rounded-sm bg-primary-content hidden md:block">
                   <div class="w-2 h-2 rounded-sm bg-primary"></div>
                 </div>
@@ -85,7 +88,7 @@
                 </svg>
               </div>
               <ul tabindex="0" id="theme-list"
-                class="border m-[1px] border-primary-content dropdown-content bg-base-300 rounded-md z-[1] w-52 h-[40vh] overflow-auto p-2 shadow-2xl">
+                class="nav-bar-bg nav-bar-text border m-[1px] border-primary-content dropdown-content bg-base-300 rounded-md z-[1] w-52 h-[40vh] overflow-auto p-2 shadow-2xl">
               </ul>
             </div>
 
@@ -128,18 +131,19 @@
 
           </div>
         </div>
+        <button id="customize-btn"
+          class="nav-bar-bg nav-bar-text btn p-2 border border-gray-300 rounded-md hidden md:block">Customize</button>
       </div>
 
-      <div id="meme-container" class="flex overflow-auto justify-center align-middle bg-base-300 mr-2 mb-2 rounded-md">
+      <div id="meme-container"
+        class="main-bg flex overflow-auto justify-center align-middle bg-base-300 mr-2 mb-2 rounded-md">
         <div class="p-5 w-full">
-          <p class="font-semibold mb-5 text-2xl">Memes Feed</p>
+          <p class="main-text font-semibold mb-5 text-2xl">Memes Feed</p>
           <div id="meme-list" class="grid grid-cols-1 xxs:sm:grid-cols-2 sm:grid-cols-3 gap-4 pb-4">
           </div>
         </div>
       </div>
     </div>
-
-
 
   </main>
 
@@ -183,6 +187,59 @@
       </div>
     </div>
   </dialog>
+
+
+  <dialog id="customize_theme_modal" class="modal modal-middle">
+    <div class="modal-box w-auto">
+      <p class="py-4">This customized theme is not the main theme and is not saved. It only shows how the theme would
+        look with these colors.</p>
+      <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-rows-[30px_1fr] gap-1 bg-primary-content rounded-md overflow-hidden cursor-pointer p-2">
+          <div
+            class="my-box h-[30px] bg-base-100 mb-1 w-full text-base-content rounded-md flex justify-center items-center text-xs">
+            Header
+          </div>
+          <div class="grid grid-cols-[60px_1fr] h-full gap-1">
+            <div
+              class="my-box w-full h-full bg-base-300 text-base-content rounded-md flex justify-center items-center text-xs">
+              Side Bar
+            </div>
+            <div
+              class="my-box w-full h-full bg-base-300 text-base-content rounded-md flex flex-col gap-2 justify-center items-center text-xs">
+              <p>Main</p>
+              <div
+                class="w-10 h-5 p-0 rounded-sm btn-primary bg-primary text-base-100 flex justify-center items-center text-[10px]">
+                Btn</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-base-300 rounded-md p-2">
+          <div id="radio-btn-container" class="flex flex-col gap-2 mb-2">
+            <div class="flex gap-2">
+              <label class="label w-full cursor-pointer">
+                <span class="label-text">Baground</span>
+                <input type="radio" name="radio-1" value="baground" class="radio checked:bg-primary"
+                  checked="checked" />
+              </label>
+              <label class="label w-full cursor-pointer">
+                <span class="label-text">Text</span>
+                <input type="radio" name="radio-1" value="text" class="radio checked:bg-primary" />
+              </label>
+            </div>
+          </div>
+          <div id="fixed" class="invisible"></div>
+        </div>
+      </div>
+      <div class="modal-action">
+        <form method="dialog">
+          <button id="reload-btn" class="btn ">Reset</button>
+          <button id="customize-close-btn" class="btn btn-primary">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="https://unpkg.com/vanilla-picker@2"></script>
   <script src="script.js"></script>
 </body>
 

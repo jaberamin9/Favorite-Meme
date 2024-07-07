@@ -10582,6 +10582,10 @@ html:has(.drawer-open.drawer-open) {
   margin: 1px;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -10596,10 +10600,6 @@ html:has(.drawer-open.drawer-open) {
 
 .ml-2 {
   margin-left: 0.5rem;
-}
-
-.mr-1 {
-  margin-right: 0.25rem;
 }
 
 .mr-2 {
@@ -10728,6 +10728,10 @@ html:has(.drawer-open.drawer-open) {
   height: 1rem;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
 .h-6 {
   height: 1.5rem;
 }
@@ -10738,6 +10742,10 @@ html:has(.drawer-open.drawer-open) {
 
 .h-\[300px\] {
   height: 300px;
+}
+
+.h-\[30px\] {
+  height: 30px;
 }
 
 .h-\[40vh\] {
@@ -10764,8 +10772,8 @@ html:has(.drawer-open.drawer-open) {
   height: 100vh;
 }
 
-.min-h-full {
-  min-height: 100%;
+.w-10 {
+  width: 2.5rem;
 }
 
 .w-2 {
@@ -11171,8 +11179,20 @@ html:has(.drawer-open.drawer-open) {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-\[60px_1fr\] {
+  grid-template-columns: 60px 1fr;
+}
+
+.grid-rows-\[30px_1fr\] {
+  grid-template-rows: 30px 1fr;
 }
 
 .grid-rows-\[64px_1fr\] {
@@ -11777,6 +11797,10 @@ html:has(.drawer-open.drawer-open) {
   border-width: 1px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .border-x {
   border-left-width: 1px;
   border-right-width: 1px;
@@ -11833,6 +11857,11 @@ html:has(.drawer-open.drawer-open) {
 
 .border-none {
   border-style: none;
+}
+
+.border-blue-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
 }
 
 .border-gray-300 {
@@ -12050,8 +12079,8 @@ html:has(.drawer-open.drawer-open) {
   padding-bottom: 1rem;
 }
 
-.pr-1 {
-  padding-right: 0.25rem;
+.pr-2 {
+  padding-right: 0.5rem;
 }
 
 .text-left {
@@ -12118,6 +12147,10 @@ html:has(.drawer-open.drawer-open) {
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
 }
 
 .text-lg {
@@ -12673,6 +12706,20 @@ html:has(.drawer-open.drawer-open) {
   background: #b5b5b5;
 }
 
+.layout_default.picker_wrapper {
+  display: flex !important;
+  flex-flow: row wrap !important;
+  justify-content: space-between !important;
+  align-items: stretch !important;
+  font-size: 10px !important;
+  width: 100% !important;
+  padding: .5em !important;
+}
+
+.layout_default .picker_editor input {
+  background-color: white;
+}
+
 @media (hover:hover) {
   .table .hover\:hover:hovertr:hover,
   .table .hover\:hover:hovertr:nth-child(even):hover {
@@ -12774,6 +12821,11 @@ html:has(.drawer-open.drawer-open) {
       }
     }
   }
+}
+
+.checked\:bg-primary:checked {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
 }
 
 .hover\:scale-105:hover {

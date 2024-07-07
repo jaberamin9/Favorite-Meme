@@ -22,3 +22,17 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #b5b5b5;
 }
+
+.layout_default.picker_wrapper {
+    display: flex !important;
+    flex-flow: row wrap !important;
+    justify-content: space-between !important;
+    align-items: stretch !important;
+    font-size: 10px !important;
+    width: 100% !important;
+    padding: .5em !important;
+}
+
+.layout_default .picker_editor input {
+    background-color: white;
+}
