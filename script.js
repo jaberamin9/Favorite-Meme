@@ -231,6 +231,7 @@ function displayMemes(data) {
             memeImage.src = meme.url;
             memeImage.alt = "img";
             memeImage.setAttribute('referrerpolicy', 'no-referrer');
+            memeItem.setAttribute('onclick', `viewImageFullScreen('${meme.url}')`);
             memeImage.setAttribute('class', 'hover:scale-105 cursor-pointer transition-all object-cover w-full h-full');
             memeItem.appendChild(memeImage);
 
@@ -240,7 +241,7 @@ function displayMemes(data) {
 
             const buttonNode = document.createElement('button');
             const convertToString = JSON.stringify(meme);
-            buttonNode.setAttribute('onclick', `openMemeModal(${convertToString})`);
+            buttonNode.setAttribute('onclick', `openMemeModal(${convertToString},event)`);
             buttonNode.setAttribute('class', 'btn rounded-full');
             divNode.appendChild(buttonNode);
 
@@ -249,7 +250,7 @@ function displayMemes(data) {
             buttonNode.appendChild(icon);
 
             const downloadButtonNode = document.createElement('button');
-            downloadButtonNode.setAttribute('onclick', `downloadImage('${meme.url}')`);
+            downloadButtonNode.setAttribute('onclick', `downloadImage('${meme.url}',event)`);
             downloadButtonNode.setAttribute('class', 'btn rounded-full');
             divNode.appendChild(downloadButtonNode);
 
@@ -290,7 +291,8 @@ function errorMsg(memeList, msg, code) {
     }
     memeList.appendChild(divNode);
 }
-function openMemeModal(meme) {
+function openMemeModal(meme, e) {
+    e.stopPropagation();
     const memeTitleInput = document.getElementById('meme-title-input');
     memeTitleInput.value = meme.description || '';
 
@@ -346,16 +348,17 @@ function loadFavorite(memes) {
 function loadFavoriteMemeItem(memes, memeList) {
     memes.forEach(meme => {
         var nodeDiv = document.createElement('div');
-        nodeDiv.setAttribute('class', 'side-bar-forground flex gap-2 items-center bg-base-100 rounded-md p-2 cursor-pointer');
+        nodeDiv.setAttribute('class', 'side-bar-forground flex gap-2 items-center bg-base-100 rounded-md p-2');
 
         var nodeDiv2 = document.createElement('div');
         nodeDiv2.setAttribute('class', 'w-[100px] h-[70px] rounded-md overflow-clip');
         nodeDiv.appendChild(nodeDiv2);
 
         var nodeImg = document.createElement('img');
-        nodeImg.setAttribute('class', 'object-cover w-full h-full');
+        nodeImg.setAttribute('class', 'object-cover w-full h-full cursor-pointer');
         nodeImg.alt = "img";
         nodeImg.src = meme.url;
+        nodeImg.setAttribute('onclick', `viewImageFullScreen('${meme.url}')`);
         nodeImg.setAttribute('referrerpolicy', 'no-referrer');
         nodeDiv2.appendChild(nodeImg);
 
@@ -375,8 +378,8 @@ function loadFavoriteMemeItem(memes, memeList) {
         nodeDiv4.appendChild(nodeDiv7);
 
         var nodeDiv8 = document.createElement('div');
-        nodeDiv8.setAttribute('onclick', `downloadImage('${meme.url}')`);
-        nodeDiv8.setAttribute('class', 'side-bar-bg hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
+        nodeDiv8.setAttribute('onclick', `downloadImage('${meme.url}',event)`);
+        nodeDiv8.setAttribute('class', 'cursor-pointer side-bar-bg hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
         nodeDiv7.appendChild(nodeDiv8);
 
         var nodeI = document.createElement('i');
@@ -386,7 +389,7 @@ function loadFavoriteMemeItem(memes, memeList) {
 
         var nodeDiv10 = document.createElement('div');
         nodeDiv10.setAttribute('onclick', `deleteFavorite('${meme.id}')`);
-        nodeDiv10.setAttribute('class', 'side-bar-bg hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
+        nodeDiv10.setAttribute('class', 'cursor-pointer side-bar-bg hover:bg-base-200 bg-base-300 w-8 h-8 rounded-full flex justify-center items-center');
         nodeDiv7.appendChild(nodeDiv10);
 
         var nodeI2 = document.createElement('i');
@@ -430,13 +433,13 @@ function deleteFavorite(id) {
     }
 }
 
-function downloadImage(imageUrl) {
+function downloadImage(imageUrl, e) {
+    e.stopPropagation();
     const uniqueName = `image_${new Date().getTime()}.jpg`;
     const proxyUrl = 'https://corsproxy.io/?';
     if (imageUrl.includes(".jpeg")) {
         imageUrl = proxyUrl + encodeURIComponent(imageUrl);
     }
-    console.log(imageUrl)
     fetch(imageUrl)
         .then(response => response.blob())
         .then(blob => {
@@ -464,6 +467,32 @@ function updateURLParameter(param, value) {
     url.searchParams.set(param, value);
     history.replaceState(null, '', url.toString());
 }
+
+
+function viewImageFullScreen(url) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const imgSrc = url
+
+    modalImg.src = imgSrc;
+    modal.classList.add('modal-open');
+
+    document.getElementById('closeModalButton').addEventListener('click', function () {
+        modal.classList.remove('modal-open');
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target == modal) {
+            modal.classList.remove('modal-open');
+        }
+    });
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' || event.key === 'Esc') {
+            modal.classList.remove('modal-open');
+        }
+    });
+}
+
 
 
 //customize theme
