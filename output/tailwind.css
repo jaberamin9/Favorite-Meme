@@ -10853,6 +10853,10 @@ html:has(.drawer-open.drawer-open) {
   flex-shrink: 1;
 }
 
+.shrink-0 {
+  flex-shrink: 0;
+}
+
 .flex-grow {
   flex-grow: 1;
 }
